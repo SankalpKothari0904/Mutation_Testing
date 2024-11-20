@@ -9,6 +9,16 @@ class Interval:
 class ClassicalDP():
     
     def knapSack(self, max_weight: int, vals: List[int], weights: List[int]) -> int:
+
+        if max_weight < 0:
+            return -1
+        if len(vals) != len(weights):
+            return -1
+        if len(vals) < 1 or len(weights) < 1:
+            return -1
+        if any(v <= 0 for v in vals) or any(w <= 0 for w in weights):
+            return -1
+
         n = len(weights)
         OPT = [[0] * (max_weight + 1) for _ in range(n + 1)]
 
@@ -32,6 +42,7 @@ class ClassicalDP():
     
     def longest_increasing_subsequence(self, nums: List[int]) -> int:
         n = len(nums)
+
         if (n == 0): 
             return 0
         # OPT[i] stores the length of the LIS ending at index i.
@@ -48,6 +59,9 @@ class ClassicalDP():
 
     def longest_palindrome(self, arg: str) -> int:
         n = len(arg)
+
+        if (n == 0):
+            return 0
 
         # OPT[i][j] stores the length of the longest palindromic subsequence between i and j (inclusive)
         OPT = [[0] * n for _ in range(n)]
@@ -71,7 +85,9 @@ class ClassicalDP():
         return OPT[0][n-1]
     
     def house_robber(self, input: List[int]) -> int:
-        if len(input) == 1:
+        if (len(input) == 0):
+            return 0
+        elif len(input) == 1:
             return input[0]
         elif len(input) == 2:
             return max(input[0], input[1])
@@ -116,6 +132,15 @@ class ClassicalDP():
 
 
     def get_schedule(self, startTime: List[int], endTime: List[int], weights: List[int]) -> int:
+
+        if len(startTime) != len(endTime) or len(startTime) != len(weights):
+            return -1
+        if len(startTime) == 0:
+            return 0
+        if any(x <= 0 for x in weights):  # Weights must be positive
+            return -1
+        if any(startTime[i] >= endTime[i] for i in range(len(startTime))):  # Invalid interval
+            return -1
         
         intervals = [Interval(startTime[i], endTime[i], weights[i]) for i in range(len(startTime))]
 
@@ -149,6 +174,10 @@ class ClassicalDP():
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
         word_set = set(wordDict)
         n = len(s)
+
+        if (n == 0):
+            return True
+        
         dp = [False] * (n + 1)
         dp[0] = True  # Base case: empty string is valid
 
@@ -162,6 +191,14 @@ class ClassicalDP():
     
     def coinChange(self, coins: List[int], amount: int) -> int:
         # OPT[i] -> minimum number of coins to make sum i
+
+        if (amount <= 0):
+            return -1
+        if (len(coins) == 0):
+            return -1
+        if (any(coin <= 0 for coin in coins)):
+            return -1
+
         INT_MAX = float('inf')
         OPT = [INT_MAX] * (amount + 1)
         OPT[0] = 0  # Base case: no coins needed for amount 0
@@ -171,7 +208,10 @@ class ClassicalDP():
                 if sum - coin >= 0 and OPT[sum - coin] != INT_MAX:
                     OPT[sum] = min(OPT[sum], OPT[sum - coin] + 1)
 
-        return -1 if OPT[amount] == INT_MAX else OPT[amount]
+        if (OPT[amount] == INT_MAX):
+            return -1
+        
+        return OPT[amount]
     
     def longestCommonSubsequence(self, text1: str, text2: str) -> int:
         m, n = len(text1), len(text2)
@@ -189,6 +229,8 @@ class ClassicalDP():
     def catalan_recursive(self, n: int) -> int:
         if (n == 0 or n == 1):
             return 1
+        elif (n < 0):
+            return -1
 
         # Table to store results of subproblems
         catalan = [0]*(n+1)
@@ -207,8 +249,10 @@ class ClassicalDP():
         return catalan[n]
     
     def catalan_closed_form(self, n: int)-> int:
+        if (n < 0):
+            return -1
+        
         res = 1
-
         # Iterate till N
         for i in range(1, n):
             # Calculate the ith Catalan number
@@ -216,6 +260,8 @@ class ClassicalDP():
         return res
     
     def factorial(self, n: int) -> int:
+        if (n < 0):
+            return -1
         # 0! and 1! = 1
         if n == 0 or n == 1:
             return 1
@@ -228,6 +274,18 @@ class ClassicalDP():
         return res
     
     def stirling_number(self, r: int, n: int) -> int:
+
+        if (n < 0 or r < 0):
+            return -1
+        if (n < r):
+            return 0
+        if (n == 0):
+            return 1
+        if (r == 0):
+            return 0
+        if (n == r):
+            return 1
+
         # Create a 2D list to store the Stirling numbers
         dp = [[0] * (r + 1) for _ in range(n + 1)]
     
@@ -268,7 +326,12 @@ class ClassicalDP():
 
         return dp[m][n]
     
-    def matrixMultiplication(self, N: int, arr: List[int]) -> int:
+    def matrixMultiplication(self, arr: List[int]) -> int:
+
+        if (any(dim <= 0 for dim in arr)):
+            return -1
+
+        N = len(arr)
         # Create a 2D array to store the minimum multiplication costs
         opt = [[0] * N for _ in range(N)]
 
@@ -286,6 +349,9 @@ class ClassicalDP():
     
     def maxProduct(self, nums: List[int]) -> int:
         n = len(nums)
+
+        if (n < 0):
+            return 0
         
         # Initialize the variables for maximum and minimum products at the current index
         max_prod, min_prod, result = nums[0], nums[0], nums[0]
@@ -303,3 +369,48 @@ class ClassicalDP():
             result = max(result, max_prod)
 
         return result
+    
+    def fibonacci(self, n: int) -> int:
+
+        if (n < 0):
+            return -1
+        if n <= 1:
+            return n
+        
+        dp = [0] * (n + 1)
+        dp[1] = 1
+
+        for i in range(2, n + 1):
+            dp[i] = dp[i - 1] + dp[i - 2]
+
+        return dp[n]
+    
+    def binomial_coefficient(self, n: int, k: int) -> int:
+
+        if (n < 0 or k < 0):
+            return -1
+        if (k > n):
+            return -1
+
+        dp = [[0] * (k + 1) for _ in range(n + 1)]
+
+        for i in range(n + 1):
+            dp[i][0] = 1  # Base case
+
+            for j in range(1, min(i, k) + 1):
+                dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j]
+
+        return dp[n][k]
+    
+    def derangement_count(self, n: int) -> int:
+
+        if (n < 0):
+            return -1
+
+        dp = [0] * (n + 1)
+        dp[0], dp[1] = 1, 0  # Base cases
+
+        for i in range(2, n + 1):
+            dp[i] = (i - 1) * (dp[i - 1] + dp[i - 2])
+
+        return dp[n]
