@@ -273,7 +273,7 @@ class ClassicalDP {
 
         int res = 1;
         // Iterate till N to calculate Catalan number
-        for (int i = 1; i < n; i++) {
+        for (int i = 1; i <= n; i++) {
             res = (res * (4 * i - 2)) / (i + 1);
         }
         return res;
@@ -303,13 +303,13 @@ class ClassicalDP {
         if (n < 0 || r < 0) {
             return -1;
         }
-        if (n < r) {
+        if (r < n) {
             return 0;
         }
-        if (n == 0) {
+        if (r == 0) {
             return 1;
         }
-        if (r == 0) {
+        if (n == 0) {
             return 0;
         }
         if (n == r) {
@@ -438,7 +438,7 @@ class ClassicalDP {
 
     // Function to compute the binomial coefficient C(n, k)
     public int binomialCoefficient(int n, int k) {
-        if (n < 0 || k < 0 || k > n) {
+        if (k < 0 || k > n) {
             return -1;
         }
 
@@ -459,6 +459,9 @@ class ClassicalDP {
     public int derangementCount(int n) {
         if (n < 0) {
             return -1;
+        }
+        if (n == 0){
+            return 1;
         }
 
         int[] dp = new int[n + 1];

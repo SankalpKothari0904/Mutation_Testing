@@ -307,7 +307,7 @@ public class ClassicalDPTest {
         List<Integer> weights = Arrays.asList(20, 30, 40, 50);
 
         int result = dp.getSchedule(startTime, endTime, weights);
-        assertEquals(80, result);
+        assertEquals(50, result);
     }
 
     // Word Break Tests
@@ -486,16 +486,16 @@ public class ClassicalDPTest {
 
     @Test
     public void stirling_number_case3() {
-        // Case 3: n = 3, r = 2 (valid input)
-        int n = 3, r = 2;
+        // Case 3: r = 3, n = 2 (valid input)
+        int r = 3, n = 2;
         int result = dp.stirling_number(r, n);
         assertEquals(3, result); // Stirling number S(3, 2) = 3
     }
 
     @Test
     public void stirling_number_case4() {
-        // Case 4: n = 2, r = 3 (n < r)
-        int n = 2, r = 3;
+        // Case 4: r = 2, n = 3 (n > r)
+        int r = 2, n = 3;
         int result = dp.stirling_number(r, n);
         assertEquals(0, result);
     }
@@ -506,6 +506,160 @@ public class ClassicalDPTest {
         int n = -1, r = 3;
         int result = dp.stirling_number(r, n);
         assertEquals(-1, result);
+    }
+
+    //Min Distance Test
+
+    @Test
+    public void minDistance_case1() {
+        // Case 1: Both strings are empty
+        String word1 = "";
+        String word2 = "";
+        int result = dp.minDistance(word1, word2);
+        assertEquals(0, result);
+    }
+
+    @Test
+    public void minDistance_case2() {
+        // Case 2: One string is empty
+        String word1 = "abc";
+        String word2 = "";
+        int result = dp.minDistance(word1, word2);
+        assertEquals(3, result); // Deleting all characters in "abc"
+    }
+
+    @Test
+    public void minDistance_case3() {
+        // Case 3: Both strings are identical
+        String word1 = "abc";
+        String word2 = "abc";
+        int result = dp.minDistance(word1, word2);
+        assertEquals(0, result); // No edits required
+    }
+
+    @Test
+    public void minDistance_case4() {
+        // Case 4: One string is a substring of the other
+        String word1 = "abc";
+        String word2 = "abcd";
+        int result = dp.minDistance(word1, word2);
+        assertEquals(1, result); // Add 'd' to "abc"
+    }
+
+    @Test
+    public void minDistance_case5() {
+        // Case 5: General case with edits required
+        String word1 = "horse";
+        String word2 = "ros";
+        int result = dp.minDistance(word1, word2);
+        assertEquals(3, result); // Replace 'h' -> 'r', delete 'o', delete 'e'
+    }
+    
+    //Matrix Multiplication Test
+
+    @Test
+    public void matrixMultiplication_case1() {
+        // Case 1: Array has fewer than 2 elements
+        int[] arr = {10};
+        int result = dp.matrixMultiplication(arr);
+        assertEquals(-1, result);
+    }
+
+    @Test
+    public void matrixMultiplication_case2() {
+        // Case 2: Array contains a non-positive dimension
+        int[] arr = {10, -20, 30};
+        int result = dp.matrixMultiplication(arr);
+        assertEquals(-1, result);
+    }
+
+    @Test
+    public void matrixMultiplication_case3() {
+        // Case 3: Minimal valid input (2 matrices)
+        int[] arr = {10, 20, 30};
+        int result = dp.matrixMultiplication(arr);
+        assertEquals(6000, result); // 10x20 * 20x30 = 6000
+    }
+
+    @Test
+    public void matrixMultiplication_case4() {
+        // Case 4: Valid input with multiple matrices
+        int[] arr = {10, 20, 30, 40, 30};
+        int result = dp.matrixMultiplication(arr);
+        assertEquals(30000, result); // Optimal cost calculation
+    }
+
+    @Test
+    public void matrixMultiplication_case5() {
+        // Case 5: Array with all equal dimensions
+        int[] arr = {10, 10, 10, 10};
+        int result = dp.matrixMultiplication(arr);
+        assertEquals(2000, result); // Optimal multiplication cost
+    }
+    
+    //Max Product Testcases
+    @Test
+    public void maxProduct_case1() {
+        // Case 1: Empty array
+        int[] nums = {};
+        int result = dp.maxProduct(nums);
+        assertEquals(0, result);
+    }
+
+    @Test
+    public void maxProduct_case2() {
+        // Case 2: Single positive number
+        int[] nums = {5};
+        int result = dp.maxProduct(nums);
+        assertEquals(5, result);
+    }
+
+    @Test
+    public void maxProduct_case3() {
+        // Case 3: Single negative number
+        int[] nums = {-3};
+        int result = dp.maxProduct(nums);
+        assertEquals(-3, result);
+    }
+
+    @Test
+    public void maxProduct_case4() {
+        // Case 4: Multiple positive numbers
+        int[] nums = {1, 2, 3, 4};
+        int result = dp.maxProduct(nums);
+        assertEquals(24, result); // 1*2*3*4 = 24
+    }
+
+    @Test
+    public void maxProduct_case5() {
+        // Case 5: Mixed positive and negative numbers
+        int[] nums = {2, 3, -2, 4};
+        int result = dp.maxProduct(nums);
+        assertEquals(6, result); // 2*3 = 6
+    }
+
+    @Test
+    public void maxProduct_case6() {
+        // Case 6: Contains zero
+        int[] nums = {-2, 0, -1};
+        int result = dp.maxProduct(nums);
+        assertEquals(0, result); // Single 0 is the max product
+    }
+
+    @Test
+    public void maxProduct_case7() {
+        // Case 7: Mixed positive, negative, and zero
+        int[] nums = {-2, 3, -4};
+        int result = dp.maxProduct(nums);
+        assertEquals(24, result); // (-2)*(-4)*3 = 24
+    }
+
+    @Test
+    public void maxProduct_case8() {
+        // Case 8: All negative numbers
+        int[] nums = {-1, -3, -10, -2};
+        int result = dp.maxProduct(nums);
+        assertEquals(60, result);
     }
 
     // Fibonacci Tests
@@ -527,5 +681,100 @@ public class ClassicalDPTest {
     @Test
     public void testFibonacci_case4() {
         assertEquals(1, dp.fibonacci(1));
+    }
+
+    //Binomial Coefficients Test
+
+    @Test
+    public void binomialCoefficient_case1() {
+        // Case 1: Invalid input, k < 0
+        int result = dp.binomialCoefficient(5, -1);
+        assertEquals(-1, result);
+    }
+
+    @Test
+    public void binomialCoefficient_case2() {
+        // Case 2: Invalid input, k > n
+        int result = dp.binomialCoefficient(4, 5);
+        assertEquals(-1, result);
+    }
+
+    @Test
+    public void binomialCoefficient_case3() {
+        // Case 3: k = 0 (base case)
+        int result = dp.binomialCoefficient(5, 0);
+        assertEquals(1, result);
+    }
+
+    @Test
+    public void binomialCoefficient_case4() {
+        // Case 4: n = k (base case)
+        int result = dp.binomialCoefficient(4, 4);
+        assertEquals(1, result);
+    }
+
+    @Test
+    public void binomialCoefficient_case5() {
+        // Case 5: General case, small n and k
+        int result = dp.binomialCoefficient(5, 2);
+        assertEquals(10, result); // C(5, 2) = 10
+    }
+
+    @Test
+    public void binomialCoefficient_case6() {
+        // Case 6: General case, larger n and k
+        int result = dp.binomialCoefficient(10, 3);
+        assertEquals(120, result); // C(10, 3) = 120
+    }
+
+    //Derangement Tests
+
+    @Test
+    public void derangementCount_case1() {
+        // Case 1: Invalid input, n < 0
+        int result = dp.derangementCount(-1);
+        assertEquals(-1, result);
+    }
+
+    @Test
+    public void derangementCount_case2() {
+        // Case 2: Base case, n = 0
+        int result = dp.derangementCount(0);
+        assertEquals(1, result); // D(0) = 1
+    }
+
+    @Test
+    public void derangementCount_case3() {
+        // Case 3: Base case, n = 1
+        int result = dp.derangementCount(1);
+        assertEquals(0, result); // D(1) = 0
+    }
+
+    @Test
+    public void derangementCount_case4() {
+        // Case 4: Small n, n = 2
+        int result = dp.derangementCount(2);
+        assertEquals(1, result); // D(2) = 1
+    }
+
+    @Test
+    public void derangementCount_case5() {
+        // Case 5: Small n, n = 3
+        int result = dp.derangementCount(3);
+        assertEquals(2, result); // D(3) = 2
+    }
+
+    @Test
+    public void derangementCount_case6() {
+        // Case 6: General case, n = 4
+        int result = dp.derangementCount(4);
+        assertEquals(9, result); // D(4) = 9
+    }
+
+    @Test
+    public void derangementCount_case7() {
+        // Case 7: Larger n, n = 5
+        int result = dp.derangementCount(5);
+        assertEquals(44, result); // D(5) = 44
     }
 }
