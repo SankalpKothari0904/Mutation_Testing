@@ -40,7 +40,7 @@ class ClassicalDP():
         
         return OPT[n][max_weight]
     
-    def longest_increasing_subsequence(self, nums: List[int]) -> int:
+    def longestIncreasingSubsequence(self, nums: List[int]) -> int:
         n = len(nums)
 
         if (n == 0): 
@@ -57,7 +57,7 @@ class ClassicalDP():
         max_length = max(OPT)
         return max_length
 
-    def longest_palindrome(self, arg: str) -> int:
+    def longestPalindrome(self, arg: str) -> int:
         n = len(arg)
 
         if (n == 0):
@@ -108,7 +108,7 @@ class ClassicalDP():
         
         return OPT[-1]
     
-    def binary_search_finish(self, intervals, k):
+    def binarySearchFinish(self, intervals, k):
         l, r = 0, len(intervals) - 1
 
         if intervals[0].end > k:
@@ -155,7 +155,7 @@ class ClassicalDP():
 
         # Build lastEnding using binary search
         for j in range(1, n):
-            lastEnding[j] = self.binary_search_finish(intervals, intervals[j].start)
+            lastEnding[j] = self.binarySearchFinish(intervals, intervals[j].start)
 
         # Fill OPT using dynamic programming
         for i in range(1, n):
@@ -254,7 +254,7 @@ class ClassicalDP():
         
         res = 1
         # Iterate till N
-        for i in range(1, n):
+        for i in range(1, n+1):
             # Calculate the ith Catalan number
             res = (res * (4 * i - 2)) // (i + 1)
         return res
@@ -277,11 +277,11 @@ class ClassicalDP():
 
         if (n < 0 or r < 0):
             return -1
-        if (n < r):
+        if (r < n):
             return 0
-        if (n == 0):
-            return 1
         if (r == 0):
+            return 1
+        if (n == 0):
             return 0
         if (n == r):
             return 1
