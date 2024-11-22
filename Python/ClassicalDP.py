@@ -303,7 +303,7 @@ class ClassicalDP():
         return dp[n][r]
     
     
-    def minDistance(self, word1: str, word2: str) -> int:
+    def min_distance(self, word1: str, word2: str) -> int:
         m, n = len(word1), len(word2)
         
         # dp[i][j] will be the minimum number of operations required to convert word1[0..i) to word2[0..j)
@@ -325,12 +325,15 @@ class ClassicalDP():
 
         return dp[m][n]
     
-    def matrixMultiplication(self, arr: List[int]) -> int:
-
-        if (any(dim <= 0 for dim in arr)):
-            return -1
+    def matrix_multiplication(self, arr: List[int]) -> int:
 
         N = len(arr)
+        if (N < 2):
+            return -1
+        
+        if (any(dim <= 0 for dim in arr)):
+            return -1
+        
         # Create a 2D array to store the minimum multiplication costs
         opt = [[0] * N for _ in range(N)]
 
@@ -346,10 +349,10 @@ class ClassicalDP():
 
         return opt[0][N - 1]
     
-    def maxProduct(self, nums: List[int]) -> int:
+    def max_product(self, nums: List[int]) -> int:
         n = len(nums)
 
-        if (n < 0):
+        if (n == 0):
             return 0
         
         # Initialize the variables for maximum and minimum products at the current index
@@ -405,6 +408,9 @@ class ClassicalDP():
 
         if (n < 0):
             return -1
+        
+        elif (n == 0):
+            return 1
 
         dp = [0] * (n + 1)
         dp[0], dp[1] = 1, 0  # Base cases
