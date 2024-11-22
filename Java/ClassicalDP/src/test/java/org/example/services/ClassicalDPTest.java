@@ -508,6 +508,14 @@ public class ClassicalDPTest {
         assertEquals(-1, result);
     }
 
+    @Test
+    public void stirling_number_case6() {
+        // Case 5: n = 3, r = 9 (valid input)
+        int n = 3, r = 9;
+        int result = dp.stirling_number(r, n);
+        assertEquals(3025, result);
+    }
+
     //Min Distance Test
 
     @Test
@@ -596,6 +604,14 @@ public class ClassicalDPTest {
         int result = dp.matrixMultiplication(arr);
         assertEquals(2000, result); // Optimal multiplication cost
     }
+
+    @Test
+    public void matrixMultiplication_case6() {
+        // Case 5: Array with 2 elements
+        int[] arr = {10, 20};
+        int result = dp.matrixMultiplication(arr);
+        assertEquals(0, result); // Optimal multiplication cost
+    }
     
     //Max Product Testcases
     @Test
@@ -660,6 +676,14 @@ public class ClassicalDPTest {
         int[] nums = {-1, -3, -10, -2};
         int result = dp.maxProduct(nums);
         assertEquals(60, result);
+    }
+
+    @Test
+    public void maxProduct_case9() {
+        // Case 6: Contains zero
+        int[] nums = {2, 0, 1};
+        int result = dp.maxProduct(nums);
+        assertEquals(2, result); // Single 0 is the max product
     }
 
     // Fibonacci Tests

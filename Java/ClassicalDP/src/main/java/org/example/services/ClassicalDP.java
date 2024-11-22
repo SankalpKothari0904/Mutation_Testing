@@ -241,10 +241,10 @@ class ClassicalDP {
 
     // Function to calculate the nth Catalan number recursively
     public int catalan_recursive(int n) {
-        if (n == 0 || n == 1) {
-            return 1;
-        } else if (n < 0) {
+        if (n < 0){
             return -1;
+        }else if (n == 0 || n == 1){
+            return 1;
         }
 
         // Table to store results of subproblems
@@ -320,17 +320,17 @@ class ClassicalDP {
         int[][] dp = new int[n + 1][r + 1];
 
         // Base cases
-        for (int i = 0; i <= n; i++) {
+        for (int i = 1; i <= n; i++) {
             dp[i][i] = 1;
         }
         for (int i = 1; i <= r; i++) {
-            dp[1][i] = factorial(i - 1);
+            dp[1][i] = 1;
         }
 
         // Fill in the rest of the dp table
-        for (int i = 2; i <= n; i++) {
-            for (int j = 2; j <= r; j++) {
-                dp[i][j] = dp[i - 1][j - 1] + (j - 1) * dp[i][j - 1];
+        for (int j = 2; j <= r; j++){
+            for (int i = 2; i <= n; i++){
+                dp[i][j] = dp[i - 1][j - 1] + (i) * dp[i][j - 1];
             }
         }
 
@@ -421,12 +421,12 @@ class ClassicalDP {
     public int fibonacci(int n) {
         if (n < 0) {
             return -1;
-        }
-        if (n <= 1) {
-            return n;
+        }else if (n == 0){
+            return 0;
         }
 
         int[] dp = new int[n + 1];
+        dp[0] = 0;
         dp[1] = 1;
 
         for (int i = 2; i <= n; i++) {
