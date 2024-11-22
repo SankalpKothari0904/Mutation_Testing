@@ -5,6 +5,11 @@ Java/ClassicalDP/target/*
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+__pycache__/
+*.pyc
+*.pytest_cache/
+*.pytest_cache
+
 ### IntelliJ IDEA ###
 
 Java/ClassicalDP/.idea/*
