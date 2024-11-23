@@ -12,10 +12,13 @@ class ClassicalDP():
 
         if max_weight < 0:
             return -1
+        
         if len(vals) != len(weights):
             return -1
+        
         if len(vals) < 1 or len(weights) < 1:
             return -1
+        
         if any(v <= 0 for v in vals) or any(w <= 0 for w in weights):
             return -1
 
@@ -25,6 +28,7 @@ class ClassicalDP():
         # Initialize OPT for the base cases
         for w in range(max_weight + 1):
             OPT[0][w] = 0
+
         for i in range(n + 1):
             OPT[i][0] = 0
     
@@ -32,19 +36,23 @@ class ClassicalDP():
             for w in range(1, max_weight + 1):
                 if w - weights[i - 1] < 0:
                     OPT[i][w] = OPT[i - 1][w]
+
                 else:
                     if OPT[i - 1][w] > OPT[i - 1][w - weights[i - 1]] + vals[i - 1]:
                         OPT[i][w] = OPT[i - 1][w]
+
                     else:
                         OPT[i][w] = OPT[i - 1][w - weights[i - 1]] + vals[i - 1]
         
         return OPT[n][max_weight]
+    
     
     def longestIncreasingSubsequence(self, nums: List[int]) -> int:
         n = len(nums)
 
         if (n == 0): 
             return 0
+        
         # OPT[i] stores the length of the LIS ending at index i.
         OPT = [1] * n
 
@@ -56,6 +64,7 @@ class ClassicalDP():
         # Find the maximum length and its index
         max_length = max(OPT)
         return max_length
+
 
     def longestPalindrome(self, arg: str) -> int:
         n = len(arg)
@@ -76,19 +85,24 @@ class ClassicalDP():
                 j = i + length
                 if arg[i] == arg[j]:
                     OPT[i][j] = OPT[i + 1][j - 1] + 2
+
                 else:
                     if OPT[i + 1][j] > OPT[i][j - 1]:
                         OPT[i][j] = OPT[i + 1][j]
+
                     else:
                         OPT[i][j] = OPT[i][j - 1]
         
         return OPT[0][n-1]
     
+
     def house_robber(self, input: List[int]) -> int:
         if (len(input) == 0):
             return 0
+        
         elif len(input) == 1:
             return input[0]
+        
         elif len(input) == 2:
             return max(input[0], input[1])
 
@@ -103,11 +117,13 @@ class ClassicalDP():
         for i in range(2, n):
             if OPT[i - 2] + input[i] > OPT[i - 1]:
                 OPT[i] = OPT[i - 2] + input[i]
+
             else:
                 OPT[i] = OPT[i - 1]
         
         return OPT[-1]
     
+
     def binarySearchFinish(self, intervals, k):
         l, r = 0, len(intervals) - 1
 
@@ -116,17 +132,22 @@ class ClassicalDP():
 
         while r - l > 1:
             m = l + (r - l) // 2
+
             if intervals[m].end <= k < intervals[m + 1].end:
                 return m
+            
             elif intervals[m].end > k:
                 r = m - 1
+            
             else:
                 l = m + 1
 
         if intervals[r].end <= k:
             return r
+        
         elif intervals[l].end > k:
             return -1
+        
         else:
             return l
 
@@ -135,10 +156,13 @@ class ClassicalDP():
 
         if len(startTime) != len(endTime) or len(startTime) != len(weights):
             return -1
+        
         if len(startTime) == 0:
             return 0
+        
         if any(x <= 0 for x in weights):  # Weights must be positive
             return -1
+        
         if any(startTime[i] >= endTime[i] for i in range(len(startTime))):  # Invalid interval
             return -1
         
@@ -166,11 +190,13 @@ class ClassicalDP():
             exclude = OPT[i - 1]
             if include > exclude:
                 OPT[i] = include
+            
             else:
                 OPT[i] = exclude
 
         return OPT[n-1]
     
+
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
         word_set = set(wordDict)
         n = len(s)
@@ -189,13 +215,16 @@ class ClassicalDP():
 
         return dp[n]
     
+
     def coinChange(self, coins: List[int], amount: int) -> int:
         # OPT[i] -> minimum number of coins to make sum i
 
         if (amount <= 0):
             return -1
+        
         if (len(coins) == 0):
             return -1
+        
         if (any(coin <= 0 for coin in coins)):
             return -1
 
@@ -213,6 +242,7 @@ class ClassicalDP():
         
         return OPT[amount]
     
+
     def longestCommonSubsequence(self, text1: str, text2: str) -> int:
         m, n = len(text1), len(text2)
         dp = [[0] * (n + 1) for _ in range(m + 1)]
@@ -221,14 +251,17 @@ class ClassicalDP():
             for j in range(1, n + 1):
                 if text1[i - 1] == text2[j - 1]:
                     dp[i][j] = dp[i - 1][j - 1] + 1
+
                 else:
                     dp[i][j] = max(dp[i][j - 1], dp[i - 1][j])
 
         return dp[m][n]
     
+
     def catalan_recursive(self, n: int) -> int:
         if (n < 0):
             return -1
+        
         elif (n == 0 or n == 1):
             return 1
 
@@ -248,6 +281,7 @@ class ClassicalDP():
         # Return last entry
         return catalan[n]
     
+
     def catalan_closed_form(self, n: int)-> int:
         if (n < 0):
             return -1
@@ -255,14 +289,15 @@ class ClassicalDP():
         res = 1
         # Iterate till N
         for i in range(1, n+1):
-            # Calculate the ith Catalan number
+         
             res = (res * (4 * i - 2)) // (i + 1)
         return res
     
+
     def factorial(self, n: int) -> int:
         if (n < 0):
             return -1
-        # 0! and 1! = 1
+        
         if n == 0 or n == 1:
             return 1
     
@@ -273,16 +308,21 @@ class ClassicalDP():
     
         return res
     
+
     def stirling_number(self, r: int, n: int) -> int:
 
         if (n < 0 or r < 0):
             return -1
+        
         if (r < n):
             return 0
+        
         if (r == 0):
             return 1
+        
         if (n == 0):
             return 0
+        
         if (n == r):
             return 1
 
@@ -292,6 +332,7 @@ class ClassicalDP():
         # Fill in the base cases
         for i in range(n + 1):
             dp[i][i] = 1
+
         for i in range(1, r + 1):
             dp[1][i] = 1
 
@@ -312,6 +353,7 @@ class ClassicalDP():
         # Base case: transforming empty string to another string
         for i in range(1, m + 1):
             dp[i][0] = i
+
         for j in range(1, n + 1):
             dp[0][j] = j
 
@@ -320,10 +362,12 @@ class ClassicalDP():
             for j in range(1, n + 1):
                 if word1[i - 1] == word2[j - 1]:
                     dp[i][j] = dp[i - 1][j - 1]
+
                 else:
                     dp[i][j] = min(dp[i - 1][j - 1], dp[i - 1][j], dp[i][j - 1]) + 1
 
         return dp[m][n]
+    
     
     def matrix_multiplication(self, arr: List[int]) -> int:
 
@@ -342,13 +386,16 @@ class ClassicalDP():
             for i in range(N - length):
                 j = i + length
                 m = float('inf')
+
                 # Try all possible places to split the chain
                 for k in range(i + 1, j):
                     m = min(m, opt[i][k] + opt[k][j] + arr[i] * arr[k] * arr[j])
+
                 opt[i][j] = m
 
         return opt[0][N - 1]
     
+
     def max_product(self, nums: List[int]) -> int:
         n = len(nums)
 

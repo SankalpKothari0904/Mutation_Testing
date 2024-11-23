@@ -7,12 +7,15 @@ class ClassicalDP {
         if (maxWeight < 0) {
             return -1;
         }
+
         if (vals.size() != weights.size()) {
             return -1;
         }
+
         if (vals.isEmpty()) {
             return -1;
         }
+
         if (vals.stream().anyMatch(v -> v <= 0) || weights.stream().anyMatch(w -> w <= 0)) {
             return -1;
         }
@@ -23,6 +26,7 @@ class ClassicalDP {
         for (int w = 0; w <= maxWeight; w++) {
             OPT[0][w] = 0;
         }
+
         for (int i = 0; i <= n; i++) {
             OPT[i][0] = 0;
         }
@@ -40,11 +44,13 @@ class ClassicalDP {
         return OPT[n][maxWeight];
     }
 
+
     public int longestIncreasingSubsequence(List<Integer> nums) {
         int n = nums.size();
         if (n == 0) {
             return 0;
         }
+
         List<Integer> OPT = new ArrayList<>(Collections.nCopies(n, 1));
 
         for (int i = 0; i < n; i++) {
@@ -57,6 +63,7 @@ class ClassicalDP {
 
         return Collections.max(OPT);
     }
+
 
     public int longestPalindrome(String arg) {
         int n = arg.length();
@@ -83,6 +90,7 @@ class ClassicalDP {
         return OPT[0][n - 1];
     }
 
+
     public int houseRobber(List<Integer> input) {
         if (input.isEmpty()) {
             return 0;
@@ -94,6 +102,7 @@ class ClassicalDP {
 
         int n = input.size();
         List<Integer> OPT = new ArrayList<>(Collections.nCopies(n, -1));
+
         OPT.set(0, input.get(0));
         OPT.set(1, Math.max(input.get(0), input.get(1)));
 
@@ -103,6 +112,7 @@ class ClassicalDP {
 
         return OPT.get(n - 1);
     }
+
 
     public int binarySearchFinish(List<Interval> intervals, int k) {
         int l = 0, r = intervals.size() - 1;
@@ -131,16 +141,20 @@ class ClassicalDP {
         }
     }
 
+
     public int getSchedule(List<Integer> startTime, List<Integer> endTime, List<Integer> weights) {
         if (startTime.size() != endTime.size() || startTime.size() != weights.size()) {
             return -1;
         }
+
         if (startTime.isEmpty()) {
             return 0;
         }
+
         if (weights.stream().anyMatch(x -> x <= 0)) {
             return -1;
         }
+
         for (int i = 0; i < startTime.size(); i++) {
             if (startTime.get(i) >= endTime.get(i)) {
                 return -1;
@@ -157,6 +171,7 @@ class ClassicalDP {
         int n = intervals.size();
         List<Integer> OPT = new ArrayList<>(Collections.nCopies(n, 0));
         List<Integer> lastEnding = new ArrayList<>(Collections.nCopies(n, -1));
+        
         OPT.set(0, intervals.get(0).weight);
 
         for (int j = 1; j < n; j++) {
@@ -175,6 +190,7 @@ class ClassicalDP {
 
         return OPT.get(n - 1);
     }
+
 
     public boolean wordBreak(String s, List<String> wordDict) {
         Set<String> wordSet = new HashSet<>(wordDict);
@@ -197,6 +213,7 @@ class ClassicalDP {
 
         return dp.get(n);
     }
+
 
     public int coinChange(List<Integer> coins, int amount) {
         if (amount <= 0){
@@ -222,6 +239,7 @@ class ClassicalDP {
         return OPT.get(amount) == INT_MAX ? -1 : OPT.get(amount);
     }
 
+
     public int longestCommonSubsequence(String text1, String text2) {
         int m = text1.length(), n = text2.length();
         int[][] dp = new int[m + 1][n + 1];
@@ -238,6 +256,7 @@ class ClassicalDP {
 
         return dp[m][n];
     }
+
 
     // Function to calculate the nth Catalan number recursively
     public int catalan_recursive(int n) {
@@ -264,6 +283,7 @@ class ClassicalDP {
         // Return the nth Catalan number
         return catalan[n];
     }
+
 
     // Function to calculate the nth Catalan number using closed-form
     public int catalan_closed_form(int n) {
@@ -303,15 +323,19 @@ class ClassicalDP {
         if (n < 0 || r < 0) {
             return -1;
         }
+
         if (r < n) {
             return 0;
         }
+
         if (r == 0) {
             return 1;
         }
+
         if (n == 0) {
             return 0;
         }
+
         if (n == r) {
             return 1;
         }
@@ -367,6 +391,7 @@ class ClassicalDP {
         return dp[m][n];
     }
 
+
     // Function to find the minimum number of operations to multiply matrices
     public int matrixMultiplication(int[] arr) {
         int N = arr.length;
@@ -393,6 +418,7 @@ class ClassicalDP {
         return dp[0][N - 1];
     }
 
+
     // Function to find the maximum product subarray
     public int maxProduct(int[] nums) {
         if (nums == null || nums.length == 0) {
@@ -416,6 +442,7 @@ class ClassicalDP {
 
         return result;
     }
+
 
     // Function to calculate Fibonacci numbers using dynamic programming
     public int fibonacci(int n) {
@@ -454,6 +481,7 @@ class ClassicalDP {
 
         return dp[n][k];
     }
+    
 
     // Function to calculate derangement (count of permutations where no element is in its original position)
     public int derangementCount(int n) {
