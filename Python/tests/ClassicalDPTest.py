@@ -386,6 +386,140 @@ class ClassicalDPTest(unittest.TestCase):
         result = self.dp.stirling_number(r, n)
         self.assertEqual(result, -1)
 
+    def test_stirling_number_case6(self):
+        # Case 6: n = 3, r = 9 (valid input)
+        n, r = 3, 9
+        result = self.dp.stirling_number(r, n)
+        self.assertEqual(result, 3025)
+
+    # Min distance test cases
+    def test_min_distance_case1(self):
+        # Case 1: Both strings are empty
+        word1 = ""
+        word2 = ""
+        result = self.dp.min_distance(word1, word2)
+        self.assertEqual(result, 0)
+
+    def test_min_distance_case2(self):
+        # Case 2: One string is empty
+        word1 = "abc"
+        word2 = ""
+        result = self.dp.min_distance(word1, word2)
+        self.assertEqual(result, 3)  # Deleting all characters in "abc"
+
+    def test_min_distance_case3(self):
+        # Case 3: Both strings are identical
+        word1 = "abc"
+        word2 = "abc"
+        result = self.dp.min_distance(word1, word2)
+        self.assertEqual(result, 0)  # No edits required
+
+    def test_min_distance_case4(self):
+        # Case 4: One string is a substring of the other
+        word1 = "abc"
+        word2 = "abcd"
+        result = self.dp.min_distance(word1, word2)
+        self.assertEqual(result, 1)  # Add 'd' to "abc"
+
+    def test_min_distance_case5(self):
+        # Case 5: General case with edits required
+        word1 = "horse"
+        word2 = "ros"
+        result = self.dp.min_distance(word1, word2)
+        self.assertEqual(result, 3)  # Replace 'h' -> 'r', delete 'o', delete 'e'
+
+    # Matrix Chain Multiplication Tests
+    def test_matrix_multiplication_case1(self):
+        # Case 1: Array has fewer than 2 elements
+        arr = [10]
+        result = self.dp.matrix_multiplication(arr)
+        self.assertEqual(result, -1)
+
+    def test_matrix_multiplication_case2(self):
+        # Case 2: Array contains a non-positive dimension
+        arr = [10, -20, 30]
+        result = self.dp.matrix_multiplication(arr)
+        self.assertEqual(result, -1)
+
+    def test_matrix_multiplication_case3(self):
+        # Case 3: Minimal valid input (2 matrices)
+        arr = [10, 20, 30]
+        result = self.dp.matrix_multiplication(arr)
+        self.assertEqual(result, 6000)  # 10x20 * 20x30 = 6000
+
+    def test_matrix_multiplication_case4(self):
+        # Case 4: Valid input with multiple matrices
+        arr = [10, 20, 30, 40, 30]
+        result = self.dp.matrix_multiplication(arr)
+        self.assertEqual(result, 30000)  # Optimal cost calculation
+
+    def test_matrix_multiplication_case5(self):
+        # Case 5: Array with all equal dimensions
+        arr = [10, 10, 10, 10]
+        result = self.dp.matrix_multiplication(arr)
+        self.assertEqual(result, 2000)  # Optimal multiplication cost
+
+    def test_matrix_multiplication_case6(self):
+        # Case 6: Array with 2 elements
+        arr = [10, 20]
+        result = self.dp.matrix_multiplication(arr)
+        self.assertEqual(result, 0)  # No multiplication required
+
+    # Maximum Product Subarray Tests
+    def test_max_product_case1(self):
+        # Case 1: Empty array
+        nums = []
+        result = self.dp.max_product(nums)
+        self.assertEqual(result, 0)
+
+    def test_max_product_case2(self):
+        # Case 2: Single positive number
+        nums = [5]
+        result = self.dp.max_product(nums)
+        self.assertEqual(result, 5)
+
+    def test_max_product_case3(self):
+        # Case 3: Single negative number
+        nums = [-3]
+        result = self.dp.max_product(nums)
+        self.assertEqual(result, -3)
+
+    def test_max_product_case4(self):
+        # Case 4: Multiple positive numbers
+        nums = [1, 2, 3, 4]
+        result = self.dp.max_product(nums)
+        self.assertEqual(result, 24)  # 1*2*3*4 = 24
+
+    def test_max_product_case5(self):
+        # Case 5: Mixed positive and negative numbers
+        nums = [2, 3, -2, 4]
+        result = self.dp.max_product(nums)
+        self.assertEqual(result, 6)  # 2*3 = 6
+
+    def test_max_product_case6(self):
+        # Case 6: Contains zero
+        nums = [-2, 0, -1]
+        result = self.dp.max_product(nums)
+        self.assertEqual(result, 0)  # Max product is 0
+
+    def test_max_product_case7(self):
+        # Case 7: Mixed positive, negative, and zero
+        nums = [-2, 3, -4]
+        result = self.dp.max_product(nums)
+        self.assertEqual(result, 24)  # (-2)*(-4)*3 = 24
+
+    def test_max_product_case8(self):
+        # Case 8: All negative numbers
+        nums = [-1, -3, -10, -2]
+        result = self.dp.max_product(nums)
+        self.assertEqual(result, 60)
+
+    def test_max_product_case9(self):
+        # Case 9: Contains zero
+        nums = [2, 0, 1]
+        result = self.dp.max_product(nums)
+        self.assertEqual(result, 2)
+
     # Fibonacci Test Cases
     def test_fibonacci_case1(self):
         # Case 1: n = 0 (base case)
@@ -402,6 +536,73 @@ class ClassicalDPTest(unittest.TestCase):
     def test_fibonacci_case4(self):
         # Case 4: n = 1 (base case)
         self.assertEqual(self.dp.fibonacci(1), 1)
+
+    # Binomial Coefficient Tests
+    def test_binomial_coefficient_case1(self):
+        # Case 1: Invalid input, k < 0
+        result = self.dp.binomial_coefficient(5, -1)
+        self.assertEqual(result, -1)
+
+    def test_binomial_coefficient_case2(self):
+        # Case 2: Invalid input, k > n
+        result = self.dp.binomial_coefficient(4, 5)
+        self.assertEqual(result, -1)
+
+    def test_binomial_coefficient_case3(self):
+        # Case 3: k = 0 (base case)
+        result = self.dp.binomial_coefficient(5, 0)
+        self.assertEqual(result, 1)
+
+    def test_binomial_coefficient_case4(self):
+        # Case 4: n = k (base case)
+        result = self.dp.binomial_coefficient(4, 4)
+        self.assertEqual(result, 1)
+
+    def test_binomial_coefficient_case5(self):
+        # Case 5: General case, small n and k
+        result = self.dp.binomial_coefficient(5, 2)
+        self.assertEqual(result, 10)  # C(5, 2) = 10
+
+    def test_binomial_coefficient_case6(self):
+        # Case 6: General case, larger n and k
+        result = self.dp.binomial_coefficient(10, 3)
+        self.assertEqual(result, 120)  # C(10, 3) = 120
+
+    # Derangement Tests
+    def test_derangement_count_case1(self):
+        # Case 1: Invalid input, n < 0
+        result = self.dp.derangement_count(-1)
+        self.assertEqual(result, -1)
+
+    def test_derangement_count_case2(self):
+        # Case 2: Base case, n = 0
+        result = self.dp.derangement_count(0)
+        self.assertEqual(result, 1)  # D(0) = 1
+
+    def test_derangement_count_case3(self):
+        # Case 3: Base case, n = 1
+        result = self.dp.derangement_count(1)
+        self.assertEqual(result, 0)  # D(1) = 0
+
+    def test_derangement_count_case4(self):
+        # Case 4: Small n, n = 2
+        result = self.dp.derangement_count(2)
+        self.assertEqual(result, 1)  # D(2) = 1
+
+    def test_derangement_count_case5(self):
+        # Case 5: Small n, n = 3
+        result = self.dp.derangement_count(3)
+        self.assertEqual(result, 2)  # D(3) = 2
+
+    def test_derangement_count_case6(self):
+        # Case 6: General case, n = 4
+        result = self.dp.derangement_count(4)
+        self.assertEqual(result, 9)  # D(4) = 9
+
+    def test_derangement_count_case7(self):
+        # Case 7: Larger n, n = 5
+        result = self.dp.derangement_count(5)
+        self.assertEqual(result, 44)  # D(5) = 44
 
 
 if __name__ == "__main__":
