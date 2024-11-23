@@ -409,17 +409,17 @@ class ClassicalDP():
         for i in range(n + 1):
             dp[i][i] = 1  # S(i, i) = 1, there is one way to partition i elements into i subsets.
         for i in range(1, r + 1):
-            dp[1][i] = self.factorial(i - 1)  # S(1, j) = (j-1)!, only one way to partition 1 element into j subsets.
+            dp[1][i] = 1  # S(1, j) = 1, only one way to partition j element into 1 subsets.
     
         # Fill in the rest of the table using the recurrence relation:
         # S(n, r) = S(n-1, r-1) + (r-1) * S(n, r-1)
-        for i in range(2, n + 1):
-            for j in range(2, r + 1):
-                dp[i][j] = dp[i - 1][j - 1] + (j - 1) * dp[i][j - 1]
+
+        for j in range(2, r + 1):
+            for i in range(2, n + 1):
+                dp[i][j] = i * dp[i][j - 1] + dp[i - 1][j - 1]
     
         # Return the computed Stirling number S(n, r).
         return dp[n][r]
-    
     
     def minDistance(self, word1: str, word2: str) -> int:
         # Function to compute the minimum number of operations required to convert word1 to word2.
@@ -457,7 +457,6 @@ class ClassicalDP():
         # Return the minimum number of operations to convert word1 to word2.
         return dp[m][n]
 
-    
     def matrixMultiplication(self, arr: List[int]) -> int:
 
         # Function to compute the minimum number of scalar multiplications needed
@@ -470,7 +469,10 @@ class ClassicalDP():
             return -1  # Return -1 for invalid dimensions.
 
         N = len(arr)
+        if (N < 2):
+            return -1
         # Create a 2D array `opt` to store the minimum multiplication costs for matrix chain multiplication.
+
         opt = [[0] * N for _ in range(N)]
 
         # Loop through chain lengths from 2 to N, i.e., consider subchains of increasing size.
@@ -489,7 +491,6 @@ class ClassicalDP():
         # Return the minimum cost of multiplying the entire chain of matrices.
         return opt[0][N - 1]
 
-    
     def maxProduct(self, nums: List[int]) -> int:
         # Function to find the maximum product of a contiguous subarray.
         # Valid input conditions:
@@ -497,12 +498,13 @@ class ClassicalDP():
 
         n = len(nums)
 
-        if (n < 0):
+        if (n == 0):
             return 0  # Return 0 for invalid input.
 
         # Initialize variables:
         # - `max_prod` and `min_prod` track the maximum and minimum products at the current index.
         # - `result` stores the maximum product encountered so far.
+
         max_prod, min_prod, result = nums[0], nums[0], nums[0]
 
         # Traverse the array starting from the second element.
@@ -530,9 +532,9 @@ class ClassicalDP():
         # - `n` should be a non-negative integer.
 
         if (n < 0):
-            return -1  # Return -1 for invalid input.
-        if n <= 1:
-            return n  # Base cases: Fibonacci(0) = 0, Fibonacci(1) = 1.
+            return -1
+        elif (n == 0):
+            return 0  # Base cases: Fibonacci(0) = 0, Fibonacci(1) = 1.
 
         # Initialize a DP array to store Fibonacci numbers up to n.
         dp = [0] * (n + 1)
@@ -577,6 +579,9 @@ class ClassicalDP():
         # - n should be a non-negative integer.
         if (n < 0):
             return -1
+        
+        elif (n == 0):
+            return 1
 
         # Initialize the DP table
         dp = [0] * (n + 1)

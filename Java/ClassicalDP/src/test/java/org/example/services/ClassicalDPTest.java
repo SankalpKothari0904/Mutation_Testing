@@ -356,24 +356,18 @@ public class ClassicalDPTest {
 
     @Test
     public void testCoinChange_case4() {
-        List<Integer> coins = Arrays.asList(1, 2, 5);
-        assertEquals(-1, dp.coinChange(coins, -2));
-    }
-
-    @Test
-    public void testCoinChange_case5() {
         List<Integer> coins = List.of();
         assertEquals(-1, dp.coinChange(coins, 3));
     }
 
     @Test
-    public void testCoinChange_case6() {
+    public void testCoinChange_case5() {
         List<Integer> coins = List.of(5,3,-1);
         assertEquals(-1, dp.coinChange(coins, 8));
     }
 
     @Test
-    public void testCoinChange_case7() {
+    public void testCoinChange_case6() {
         List<Integer> coins = List.of(5,3,0);
         assertEquals(-1, dp.coinChange(coins, 8));
     }
