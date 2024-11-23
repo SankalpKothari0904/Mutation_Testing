@@ -10,7 +10,7 @@ __pycache__/
 *.pytest_cache/
 *.pytest_cache
 
-./Python/mutation_report
+./Python/mutation_report/*.html
 
 ### IntelliJ IDEA ###
 
