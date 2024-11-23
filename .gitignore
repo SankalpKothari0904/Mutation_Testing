@@ -10,6 +10,8 @@ __pycache__/
 *.pytest_cache/
 *.pytest_cache
 
+**mutants**
+
 ### IntelliJ IDEA ###
 
 Java/ClassicalDP/.idea/*
