@@ -421,7 +421,7 @@ class ClassicalDP():
         # Return the computed Stirling number S(n, r).
         return dp[n][r]
     
-    def minDistance(self, word1: str, word2: str) -> int:
+    def min_distance(self, word1: str, word2: str) -> int:
         # Function to compute the minimum number of operations required to convert word1 to word2.
         # Operations allowed: insert, delete, and replace a character.
         # Valid input conditions:
@@ -457,7 +457,7 @@ class ClassicalDP():
         # Return the minimum number of operations to convert word1 to word2.
         return dp[m][n]
 
-    def matrixMultiplication(self, arr: List[int]) -> int:
+    def matrix_multiplication(self, arr: List[int]) -> int:
 
         # Function to compute the minimum number of scalar multiplications needed
         # to multiply a chain of matrices represented by the dimensions in `arr`.
@@ -491,7 +491,7 @@ class ClassicalDP():
         # Return the minimum cost of multiplying the entire chain of matrices.
         return opt[0][N - 1]
 
-    def maxProduct(self, nums: List[int]) -> int:
+    def max_product(self, nums: List[int]) -> int:
         # Function to find the maximum product of a contiguous subarray.
         # Valid input conditions:
         # - `nums` should be a list of integers with at least one element.
