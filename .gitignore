@@ -10,7 +10,7 @@ __pycache__/
 *.pytest_cache/
 *.pytest_cache
 
-**mutants**
+**mutation_report**
 
 ### IntelliJ IDEA ###
 
