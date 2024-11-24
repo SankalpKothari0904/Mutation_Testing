@@ -38,7 +38,7 @@ For running python test cases, navigate to the top level directory of the repo, 
 
 ```
 cd Python 
-pytest tests/CLassicalDPTest.py
+pytest tests/ClassicalDPTest.py
 mut.py --target=ClassicalDP --unit-test=tests.ClassicalDPTest --report-html mutation_report
 ```
 
