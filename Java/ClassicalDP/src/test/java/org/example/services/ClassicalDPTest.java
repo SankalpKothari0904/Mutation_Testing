@@ -606,6 +606,14 @@ public class ClassicalDPTest {
         int result = dp.matrixMultiplication(arr);
         assertEquals(0, result); // Optimal multiplication cost
     }
+
+    @Test
+    public void matrixMultiplication_case7() {
+        // Case 5: Array with 2 elements
+        int[] arr = {10, 20, 0};
+        int result = dp.matrixMultiplication(arr);
+        assertEquals(-1, result); // Optimal multiplication cost
+    }
     
     //Max Product Testcases
     @Test
